@@ -1,0 +1,22 @@
+﻿﻿# build directories
+target/
+build/
+
+# eclipse
+.classpath
+.project
+.checkstyle
+.settings/
+
+# idea
+*.iml
+
+# merge trashes
+*.orig
+
+# Intellij
+*.iml
+.idea
+
+# jrebel
+rebel.xml

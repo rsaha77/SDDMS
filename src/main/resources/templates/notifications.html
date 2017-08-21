@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	    <title> Notifications </title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <ct th:replace="fragments/header :: commonhead"></ct>        
+	</head>
+	
+	<body>
+		<div
+			th:replace="fragments/header :: header">
+		</div>
+
+		<div class="container" id="layout">										
+			<div class="row">
+			
+				<div class="col-lg-12 col-sm-12">
+				
+					<span
+						th:text="#{filter.by.date}">  Filter by Date
+					</span>  
+					
+					<select id="product-type-filter" class="form-control select-box-inline region-selects">
+						<option
+							selected="selected" value="0" th:text="#{all}">All
+						</option>
+					</select>
+						
+				</div>				
+				
+			</div>
+		</div>
+		
+		<!-- <script src="resources/lib/js/fnReloadAjax.js" type="text/javascript"></script> -->
+		
+		<!-- ____________________________________Common footer (JS libs)____________________________________________________________________ -->
+		
+		<div th:replace="fragments/footer :: footer"></div>
+		
+		
+		<!--  __________________________________Call to JS_________________________________________________________________________ -->
+		
+		<script src="resources/app/js/notifications.js" type="text/javascript"> </script>
+		
+	</body>
+</html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <og th:replace="fragments/header :: commonhead"></og>
+</head>
+<body>
+    <!-- Common header -->
+    <div th:replace="fragments/header :: header"></div>
+    
+    <div class="container" id="layout">
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <p>Sorry, you are not authorized to access this page!</p>
+        </div>
+      </div>
+    </div>
+          
+    <!-- Common footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

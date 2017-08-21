@@ -1,0 +1,1075 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Product Management</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<ct th:replace="fragments/header :: commonhead"></ct>
+
+<!--  ________________________________ Hover trial starts _______________________________
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        
+        <script>
+        
+        $ ("p").hover (
+            function () {
+                $(this).css ("background-color", "yellow");
+            },
+            function () {
+                $(this).css ("background-color", "pink");
+            }
+        );
+        </script>
+        
+        ________________________________ Hover trial ends ________________________________  -->
+
+<style>
+.span3 {
+	height: 400px;
+	overflow-y: auto;
+}
+
+.select-box-inline-custom {
+	display: inline;
+	width: auto;
+	margin-bottom: 8px;
+}
+
+.skills {
+	text-decoration: underline;
+}
+</style>
+
+</head>
+
+
+
+<body>
+	<!-- <p>Hover the mouse pointer over this paragraph.</p> -->
+	<div th:replace="fragments/header :: header"></div>
+
+	<div class="col-lg-1 col-sm-1 table-buttons">
+		<!-- <p th:text="${param.a[0]}" th:unless="${param.a == null}">Test</p> -->
+	</div>
+
+
+	<!-- __________________________________________BELOW DIVISION IS FOR CLIENT / LEAD DETAILS____________________________________________________________________ -->
+
+
+	<div class="col-lg-4 col-sm-4 table-buttons">
+
+		<br /> <br /> <br /> <br /> <br />
+
+		<!-- _________________________________________LEAD PROFILE (ENDS)___________________________________________________________ -->
+
+
+		<div id="target-lead-profile" style="display: none;">
+			<div class="modal-content panel panel-info" id="lead-details-panel">
+
+				<div class="panel-heading">
+					<i class="fa fa-user"> Lead Details</i>
+				</div>
+				<div class="panel-body">
+
+					<br />
+
+					<div class="text-center">
+						<figure>
+							<span class="fa fa-user"
+								style="font-size: 127px; padding-top: 10px;"></span>
+						</figure>
+					</div>
+
+					<table class="table borderless table-hover">
+
+						<tr>
+							<th><font size="2"> Lead Id </font></th>
+							<td id="displayLeadId"></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Name </font></th>
+							<td id="displayLeadName"></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Type </font></th>
+							<td id="displayLeadType"></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Region </font></th>
+							<td id="displayLeadRegion"></td>
+						</tr>
+
+					</table>
+
+					<div class="text-center skills">
+						<strong> Contact</strong>
+					</div>
+
+					<table class="table borderless table-hover">
+						<tr>
+							<th><font size="2">Phone </font></th>
+							<td id="displayLeadPhone"></td>
+							<td id="PhoneButton"><img
+								src='resources/app/img/phone_button.png'
+								style="width: 20px; height: 15px;" /></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Email </font></th>
+							<td id="displayLeadEmail"></td>
+							<td id="EmailButton"><img
+								src='resources/app/img/email_button.png'
+								style="width: 20px; height: 15px;" /></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Address </font></th>
+							<td id="displayLeadAddress"></td>
+						</tr>
+					</table>
+
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-4 table-buttons">
+							<button id="disqualify-lead-button5" type="button"
+								class="btn btn-danger pull-left">
+								<i class="fa fa-thumbs-down"> Disqualify Lead </i>
+							</button>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 table-buttons">
+							<button id="next-order-date-for-lead-button" type="button"
+								class="btn btn-info">
+								<i class="fa fa-calendar"> Next Order Date </i>
+							</button>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 table-buttons">
+							<button id="request-product-for-lead-button" type="button"
+								class="btn btn-info pull-right">
+								<i class="fa fa-share"> Request Product </i>
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ___________________________________________________________________________________LEAD PROFILE (ENDS)_______________________________________________________________________________________ -->
+
+
+
+
+
+
+		<!-- _________________________________________CLIENT PROFILE (STARTS)___________________________________________________________ -->
+
+
+		<div id="target-client-profile" style="display: none;">
+			<div class="modal-content panel panel-info" id="client-details-panel">
+
+				<div class="panel-heading">
+					<i class="fa fa-user"> Client Details</i>
+				</div>
+				<div class="panel-body">
+
+					<div class="text-center">
+						<figure>
+							<span class="fa fa-user"
+								style="font-size: 127px; padding-top: 10px;"></span>
+						</figure>
+					</div>
+
+					<table class="table borderless table-hover">
+
+						<tr>
+							<th><font size="2"> Client Id </font></th>
+							<td id="displayClientId"></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Name </font></th>
+							<td id="displayClientName"></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Type </font></th>
+							<td id="displayClientType"></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Region </font></th>
+							<td id="displayClientRegion"></td>
+						</tr>
+
+						<!--  <tr>
+                                    <th><font size="2">Last Purchase Date </font></th> <td id="displayLastPurchaseDate"></td>
+                                </tr> -->
+
+					</table>
+
+					<div class="text-center skills">
+						<strong> Contact</strong>
+					</div>
+
+					<table class="table borderless table-hover">
+						<tr>
+							<th><font size="2">Phone </font></th>
+							<td id="displayClientPhone"></td>
+							<td id="PhoneButton2"><img
+								src='resources/app/img/phone_button.png'
+								style="width: 20px; height: 15px;" /></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Email </font></th>
+							<td id="displayClientEmail"></td>
+							<td id="EmailButton2"><img
+								src='resources/app/img/email_button.png'
+								style="width: 20px; height: 15px;" /></td>
+						</tr>
+
+						<tr>
+							<th><font size="2">Address </font></th>
+							<td id="displayClientAddress"></td>
+						</tr>
+					</table>
+
+					<button id="request-product-for-client-button" type="button"
+						class="btn btn-info pull-left">
+						<i class="fa fa-share"> Request Product </i>
+					</button>
+					<button id="next-order-date-for-client-button" type="button"
+						class="btn btn-info pull-right">
+						<i class="fa fa-calendar"> Next Order Date </i>
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- ___________________________________________________________________________________CLIENT PROFILE (ENDS)_______________________________________________________________________________________ -->
+
+
+
+
+		<!-- _________________________________________REQUEST PRODUCT MODAL (STARTS)___________________________________________________________ -->
+
+
+		<div id="target-request-product" style="display: none;">
+			<div class="modal-content panel panel-info"
+				id="request-product-for-lead-panel">
+
+				<div class="panel-heading">
+					<i class="fa fa-shopping-cart"> Request Product </i>
+				</div>
+				<div class="panel-body">
+
+					<!-- Auto Complete  -->
+					<div class="form-group">
+						<label for="productName5"> Product Name </label> <input
+							name="productName5" type="text" class="form-control"
+							id="productName5" placeholder="Name of the product" />
+					</div>
+
+					<div class="form-group">
+						<label for="productCount5"> Quantity </label> <input
+							name="productCount5" type="text" class="form-control"
+							id="productCount5" placeholder="Please Enter the Quantity needed" />
+					</div>
+
+					<button id="cancel-request-product-button" type="button"
+						class="btn btn-danger pull-left">
+						<span class="glyphicon glyphicon-remove-sign"></span> Cancel
+					</button>
+					<button id="confirm-request-product-button" type="button"
+						class="btn btn-info pull-right">
+						<span class="glyphicon glyphicon-ok"></span> Confirm
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- ___________________________________________________________________________________REQUEST PRODUCT MODAL (ENDS)_______________________________________________________________________________________ -->
+
+
+
+
+
+		<!-- _________________________________________NEXT ORDER DATE (STARTS)___________________________________________________________ -->
+
+		<div id="target-next-order" style="display: none;">
+			<div class="modal-content panel panel-info"
+				id="next-order-date-for-client-panel">
+				<div class="panel-heading">
+					<i class="fa fa-calendar"></i> Next Order Date
+				</div>
+				<div class="panel-body">
+
+					<div class="form-group date">
+						<label for="orderDate3"> Enter a Date </label> <input
+							name="orderDate3" type="text" class="form-control"
+							id="orderDate3" placeholder="Enter a date / Click on calendar" />
+					</div>
+
+
+					<br /> <br />
+
+					<div id='calendar4'></div>
+					<br />
+					<button id="cancel-next-order" type="button"
+						class="btn btn-danger pull-left" data-dismiss="modal">
+						<i class="fa fa-arrow-left"> </i> Back
+					</button>
+					<button id="confirm-next-order-date-button" type="button"
+						class="btn btn-info pull-right">
+						<span class="glyphicon glyphicon-ok"></span> Confirm
+					</button>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- ______________________________________________NEXT ORDER DATE (ENDS)_______________________________________________________________ -->
+
+		<div id="analyse-chart" style="display: none;">
+			<div id="chart-container">
+				<canvas id="canvas"></canvas>
+			</div>
+		</div>
+
+
+
+
+
+	</div>
+	<!--  Division for Client / Lead Ends -->
+
+
+
+
+
+
+
+	<div class="col-lg-6 col-sm-6 table-buttons">
+		<div class="container">
+			<div class="row">
+				<!-- ______________________________________Division for Buttons Starts___________________________________________________________________________________________________ -->
+
+
+				<div class="col-lg-12 col-sm-12 table-buttons">
+					<!--___________________________________PLACE ORDER______________________________________ -->
+
+					<button id="product-place-order-modal-btn" type="button"
+						class="btn btn-info" data-toggle="modal"
+						data-target="#product-place-order-modal" disabled="disabled">
+						<span class="glyphicon glyphicon-flash"></span> <span>Place
+							New Order</span>
+					</button>
+
+
+					<!--______________________________OFFERS SPECIFIC TO CLIENT______________________________ -->
+
+					<!-- <button id="product-offers-modal-btn" type="button" class="btn btn-success" data-toggle="modal" data-target="#product-offers-modal" disabled="disabled">
+                        <span class="glyphicon glyphicon-gift"></span>
+                        <span>Offers</span>
+                    </button> -->
+
+
+					<!--_______________________________EMERGENCY REPLACEMENT_________________________________ -->
+
+					<button id="product-emergency-replacement-modal-btn" type="button"
+						class="btn btn-warning" data-toggle="modal"
+						data-target="#product-emergency-replacement-modal"
+						disabled="disabled">
+						<span class="glyphicon glyphicon-refresh"></span> <span>Emergency
+							Replacement</span>
+					</button>
+
+
+					<!--___________________________________PRODUCT SHORTAGE__________________________________ -->
+
+					<!--  <button id="product-shortage-modal-btn" type="button" class="btn btn-info" data-toggle="modal" data-target="#product-shortage-modal" disabled="disabled">
+                        <span class="glyphicon glyphicon-send"></span>
+                        <span>Product Shortage</span>
+                    </button> -->
+
+
+					<!--_____________________________________ADD______________________________________________ -->
+
+					<button id="product-add-modal-btn" type="button"
+						class="btn btn-success btn-md" data-toggle="modal"
+						data-target="#product-add-modal">
+						<span aria-hidden="true"></span> <span> <i
+							class="fa fa-plus"></i> Add
+						</span>
+					</button>
+
+
+
+					<!--_____________________________________ MODIFY __________________________________________ -->
+
+					<button id="product-edit-modal-btn" type="button"
+						class="btn btn-primary btn-md" data-toggle="modal"
+						data-target="#product-modify-modal" disabled="disabled">
+						<span class="glyphicon glyphicon-edit"></span> <span>Modify</span>
+					</button>
+
+
+					<!--________________________________________DELETE__________________________________________ -->
+					<!-- <sec:authorize access="hasAnyRole('Manager')"> -->
+					<button id="product-open-delete-modal-btn" type="button"
+						class="btn btn-danger btn-md" data-toggle="modal"
+						data-target="#product-delete-modal" disabled="disabled">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						<span>Delete</span>
+					</button>
+					<!-- </sec:authorize> -->
+
+					<!--___________________________________PLACE ORDER______________________________________ -->
+
+					<button id="analyse-btn" type="button" class="btn btn-info">
+						<i class="fa fa-line-chart"></i> Analyse
+					</button>
+
+
+				</div>
+
+			</div>
+			<!--  ______________________________________ Division for Buttons Ends _____________________________________________________ -->
+
+
+
+
+			<!-- _______________________________Recommnedation Starts__________________________________________________  -->
+
+			<div class="row">
+				<div class="col-lg-6 col-sm-6">
+					<div class="form-group">
+						<label for="recommend-client-or-lead"> Recommend Product
+							for </label> <input name="recommend-client-or-lead" type="text"
+							class="form-control select-box-inline-custom"
+							id="recommend-client-or-lead"
+							placeholder="Client Name / Lead Name" />
+						<button style="background-color: #ECEDEE"
+							id="confirm-recommend-client-or-lead-button" type="button"
+							class="btn btn-default SELECT_CLIENT_LEAD_PROFILE">
+							<i class="fa fa-arrow-right"> </i>
+						</button>
+						<button style="background-color: #ECEDEE" id="all-result-button"
+							type="button" class="btn btn-default">
+							<i class="fa fa-refresh"></i>
+						</button>
+					</div>
+				</div>
+
+				<div class="col-lg-6 col-sm-6">
+					<!-- <div class="form-group pull-right" >
+                          <label for = "type2-reco"> Recommend Product not ordered </label> <input name = "type2-reco"
+                                type = "text" class = "form-control select-box-inline-custom" id = "type2-reco"
+                                placeholder = "Client Name / Lead Name" />
+                                <button style="background-color:#ECEDEE" id="confirm-type2-reco-button" type="button" class="btn btn-default SELECT_CLIENT_LEAD_PROFILE"> <i class="fa fa-arrow-right"> </i> </button>
+                        </div> -->
+				</div>
+			</div>
+
+			<!-- _______________________________Recommnedation Ends__________________________________________________  -->
+
+
+
+
+
+
+
+			<!-- _____________________________Display the attributes of the table____________________________________________________ -->
+
+			<div class="row">
+				<div class="col-lg-12 col-sm-12">
+					<div class="modal-content panel panel-info"
+						id="lead-from-manager-pannel">
+						<div class="panel-heading">
+							<i class="fa fa-shopping-cart"> Products </i>
+						</div>
+						<div class="panel-body">
+							<table id="product-table"
+								class="table table-striped table-bordered table-hover">
+								<!-- _______Give the product table to JS for filling up the columns______________ -->
+								<thead>
+									<tr>
+										<th></th>
+										<th>Product Id</th>
+										<th>Name</th>
+										<th>Price</th>
+										<th>Type</th>
+										<th>Season</th>
+										<th>New</th>
+										<th>Available</th>
+										<th>Ordered</th>
+										<th>Remaining</th>
+										<!-- <th>Potential Clients</th> -->
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th></th>
+										<th>Product Id</th>
+										<th>Name</th>
+										<th>Price</th>
+										<th>Type</th>
+										<th>Season</th>
+										<th>New</th>
+										<th>Available</th>
+										<th>Ordered</th>
+										<th>Remaining</th>
+										<!-- <th>Potential Clients</th> -->
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!-- Panel Body Ends -->
+					</div>
+					<!--  Panel Ends-->
+				</div>
+			</div>
+			<!-- <div class="row"> -->
+		</div>
+		<!-- <div class="container" id="layout"> -->
+
+	</div>
+	<div class="col-lg-1 col-sm-1 table-buttons"></div>
+
+	<!--  ________________________________________Table display Ends ________________________________________________________________________ -->
+
+
+
+
+
+
+	<!-- ________________________________________________________________ADD form starts___________________________________________________________________________________________________________________ -->
+
+	<div class="modal fade" id="product-add-modal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" data-mode="add">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<i class="fa fa-plus"></i> Add new product
+					</h4>
+				</div>
+
+				<div class="modal-body">
+					<form id="product-add-form">
+
+
+						<div class="form-group">
+							<label for="name"> Name </label> <input name="name" type="text"
+								class="form-control" id="name" placeholder="Product Name" />
+						</div>
+
+						<div class="form-group">
+							<label for="productId"> Product Id </label> <input
+								name="productId" type="text" class="form-control" id="productId"
+								placeholder="Product Id" />
+						</div>
+
+
+						<div class="form-group">
+							<label for="price"> Price </label> <input name="price"
+								type="text" class="form-control" id="price"
+								placeholder="Price of the product" />
+						</div>
+
+						<div class="form-group">
+							<label for="available"> Available </label> <input
+								name="available" type="text" class="form-control" id="available"
+								placeholder="Product quantity in stock" />
+						</div>
+
+						<div class="form-group">
+							<label for="type"> Type </label> <select id="typeManual"
+								class="form-control" name="typeManual"
+								onchange='CheckNewType (this.value);'>
+								<!-- This name is the variable where the JSON will store the information -->
+								<option value="Fast Food Restaurant">Fast Food
+									Restaurant</option>
+								<option value="Movie Theatre">Movie Theatre</option>
+								<option value="Sports Centre">Sports Centre</option>
+								<option value="Workplace">Workplace</option>
+								<option value="Music Arena">Music Arena</option>
+								<option value="Health Store">Health Store</option>
+								<option value="Tourist Place">Tourist Place</option>
+								<option value="All">All</option>
+								<option value="others">+ ADD NEW TYPE</option>
+							</select> <input type="text" name="typeOther" id="type"
+								style='display: none;' placeholder="Enter a new type here !!" />
+						</div>
+
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove-sign"></span> Cancel
+					</button>
+					<button id="product-add-save-button" type="button"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-floppy-disk"></span> Save
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- _______________________________________________________ ADD form ends __________________________________________________________________ -->
+
+
+
+
+	<!-- ________________________________________________________________Modify form starts___________________________________________________________________________________________________________________ -->
+
+	<div class="modal fade" id="product-modify-modal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" data-mode="add">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-edit"></span> Modify Existing
+						Product
+					</h4>
+				</div>
+
+				<div class="modal-body">
+					<form id="product-modify-form">
+
+
+						<div class="form-group">
+							<label for="productId"> Product Id </label> <input
+								name="productId" type="text" class="form-control"
+								id="productId_1" placeholder="Product Id" />
+						</div>
+
+
+						<div class="form-group">
+							<label for="name"> Name </label> <input name="name" type="text"
+								class="form-control" id="name_1" placeholder="Product Name" />
+						</div>
+
+
+						<div class="form-group">
+							<label for="price"> Price </label> <input name="price"
+								type="text" class="form-control" id="price_1"
+								placeholder="Price of the product" />
+						</div>
+
+						<div class="form-group">
+							<label for="available"> Available </label> <input
+								name="available" type="text" class="form-control"
+								id="available_1" placeholder="Product quantity in stock" />
+						</div>
+
+						<div class="form-group">
+							<label for="type"> Type </label> <select id="typeManual_1"
+								class="form-control" name="typeManual"
+								onchange='CheckNewType (this.value);'>
+								<!-- This name is the variable where the JSON will store the information -->
+								<option value="Fast Food Restaurant">Fast Food
+									Restaurant</option>
+								<option value="Movie Theatre">Movie Theatre</option>
+								<option value="Sports Centre">Sports Centre</option>
+								<option value="Workplace">Workplace</option>
+								<option value="Music Arena">Music Arena</option>
+								<option value="Health Store">Health Store</option>
+								<option value="Tourist Place">Tourist Place</option>
+								<option value="All">All</option>
+								<option value="others">+ ADD NEW TYPE</option>
+							</select> <input type="text" name="typeOther" id="type_1"
+								style='display: none;' placeholder="Enter a new type here !!" />
+						</div>
+
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove-sign"></span> Cancel
+					</button>
+					<button id="product-modify-save-button" type="button"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-floppy-disk"></span> Save
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- _______________________________________________________ Modify form ends __________________________________________________________________ -->
+
+
+	<!-- _________________________________For the DELETE button_____________________________________________________ -->
+
+
+
+	<div class="modal fade" id="product-delete-modal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-trash"></span> Confirm delete
+						product
+					</h4>
+				</div>
+				<div class="modal-body">Are you sure you want to delete the
+					selected product?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove-sign"></span> Cancel
+					</button>
+					<button id="product-delete-confirm-button" type="button"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-scissors"> </span> Delete
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- _________________________________DELETE button ends_____________________________________________________ -->
+
+
+
+
+
+
+	<!-- _________________________________________PLACE ORDER FORM STARTS___________________________________________________________ -->
+
+
+	<div class="modal fade" id="product-place-order-modal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" data-mode="add">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-flash"></span> Place an order
+					</h4>
+				</div>
+
+				<div class="modal-body">
+					<form id="order-form">
+
+						<div class="form-group">
+							<label for="clientNameFromRecommend"> Client Name </label> <input
+								name="clientNameFromRecommend" type="text" class="form-control"
+								id="clientNameFromRecommend" />
+						</div>
+						
+						<br />
+
+
+						<!-- ____________Increase According to number of selected rows________________ -->
+						<div id="products">
+							<!-- <div class="form-group col-lg-12">
+								<div class="col-lg-6">
+									<label for="productName"> Product Name </label>
+								</div>
+								<div class="col-lg-6">
+									<input name="productName" type="text" class="form-control"
+										id="productName" placeholder="Product Name" />
+								</div>
+							</div> -->
+						</div>
+
+						<!-- __________________________________________________________________________ -->
+
+
+
+
+
+						<div class="form-group date">
+							<label for="orderDate"> Date of Delivery </label> <input
+								name="orderDate" type="text" class="form-control" id="orderDate" />
+						</div>
+
+
+						<br /> <br />
+
+						<div id='calendar3'></div>
+
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button id="backFromPlaceOrder" type="button"
+						class="btn btn-danger pull-left" data-dismiss="modal">
+						<i class="fa fa-arrow-left"> </i> Back
+					</button>
+					<button id="product-place-order-confirm-button" type="button"
+						class="btn btn-success">
+						<span class="glyphicon glyphicon-ok"></span> Confirm
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- ______________________________________________PLACE ORDER FORM ENDS_______________________________________________________________ -->
+
+
+
+
+
+	<!-- _________________________________________EMERGENCY REPLACEMENT FORM STARTS___________________________________________________________ -->
+
+
+	<div class="modal fade" id="product-emergency-replacement-modal"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		data-mode="add">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-refresh"></span> Get the
+						Emergency Replacement !
+					</h4>
+				</div>
+
+				<div class="modal-body">
+					<form id="product-emergency-replacement-form">
+
+
+						<div class="form-group">
+							<label for="proId"> Product Id </label> <input name="proId"
+								type="text" class="form-control" id="proId_1"
+								placeholder="Product Id" />
+						</div>
+
+						<div class="form-group">
+							<label for="productName"> Product Name </label> <input
+								name="productName" type="text" class="form-control"
+								id="productName_1" placeholder="Client Name" />
+						</div>
+
+						<div class="form-group">
+							<label for="clientForEmergencyReplacement"> Client
+								Affected </label> <input name="clientForEmergencyReplacement"
+								type="text" class="form-control"
+								id="clientForEmergencyReplacement" />
+						</div>
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove-sign"></span> Cancel
+					</button>
+					<button id="product-emergency-replacement-confirm-button"
+						type="button" class="btn btn-success" data-toggle="modal"
+						data-target="#product-emergency-replacement-result-modal">
+						<span class="glyphicon glyphicon-export"></span> Confirm
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- _________________________________________EMERGENCY REPLACEMENT FORM ENDS___________________________________________________________ -->
+
+
+
+
+
+	<!-- _________________________________________EMERGENCY REPLACEMENT (RESULT) FORM STARTS___________________________________________________________ -->
+
+	<div class="modal fade" id="product-emergency-replacement-result-modal"
+		tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		data-mode="add">
+		<div class="modal-dialog" role="document">
+
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-correct"></span> Here are the
+						list of Emergency Replacements for product
+						<!-- REPLACEproductWhichIsShort -->
+						!!
+					</h4>
+				</div>
+
+				<div class="modal-body">
+					<form id="product-emergency-replacement-result-form">
+
+
+
+						<!--  __________________________________TABLE INSIDE FORM STARTS_____________________________________________ -->
+						<div class="span3">
+							<table id="product-emergency-replacement-table"
+								class="table table-striped table-bordered table-hover"
+								style="overflow-x: hidden;">
+								<thead>
+									<tr>
+										<th>Product Id</th>
+										<th>Product Name</th>
+										<th>Product Price</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+
+						<!--  __________________________________TABLE INSIDE FORM ENDS_____________________________________________ -->
+
+
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove-sign"></span> Cancel
+					</button>
+					<button id="product-place-order-modal-btn_1" type="button"
+						class="btn btn-primary pull-right" data-toggle="modal"
+						data-target="#product-place-order-modal" disabled="disabled">
+						<span class="glyphicon glyphicon-flash"></span> <span>Place
+							order</span>
+					</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- _________________________________________EMERGENCY REPLACEMENT (RESULT) FORM ENDS___________________________________________________________ -->
+
+
+
+
+
+
+
+	<!-- _________________________________________PRODUCT SHORTAGE FORM STARTS___________________________________________________________ -->
+
+
+	<div class="modal fade" id="product-shortage-modal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" data-mode="add">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-send"></span> Report Product
+						Shortage
+					</h4>
+				</div>
+
+				<div class="modal-body">
+					<form id="report-product-shortage">
+
+
+						<div class="form-group">
+							<label for="proId"> Product Id </label> <input name="proId"
+								type="text" class="form-control" id="proId_2"
+								placeholder="Product Id" />
+						</div>
+
+						<div class="form-group">
+							<label for="productName"> Product Name </label> <input
+								name="productName" type="text" class="form-control"
+								id="productName_2" placeholder="Product Name" />
+						</div>
+
+
+						<div class="form-group">
+							<label for="underflowQuantity"> Underflow Quantity </label> <input
+								name="underflowQuantity" type="text" class="form-control"
+								id="underflowQuantity" />
+						</div>
+
+						<div class="form-group">
+							<label for="dateOfDelivery"> Date of Delivery </label> <input
+								name="dateOfDelivery" type="text" class="form-control"
+								id="dateOfDelivery" />
+						</div>
+
+
+						<div class="form-group">
+							<label for="clientAffectedDueToShortage"> Client Affected
+							</label> <input name="clientAffectedDueToShortage" type="text"
+								class="form-control" id="clientAffectedDueToShortage" />
+						</div>
+
+					</form>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left"
+						data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove-sign"></span> Cancel
+					</button>
+					<button id="report-product-shortage-confirm-button" type="button"
+						class="btn btn-success">
+						<span class="glyphicon glyphicon-send"></span> Report
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- ______________________________________________PRODUCT SHORTAGE FORM ENDS_______________________________________________________________ -->
+
+
+	<div th:replace="fragments/footer :: footer"></div>
+	<script src="resources/app/js/fusioncharts.js" type="text/javascript"></script>
+	<script src="resources/app/js/fusioncharts.charts.js"
+		type="text/javascript"></script>
+	<script src="resources/app/js/product.js" type="text/javascript">
+		
+	</script>
+
+</body>
+</html>
+

@@ -1,0 +1,599 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title> Calendar </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <ct th:replace="fragments/header :: commonhead"></ct>     
+    </head>
+    
+    <style>
+        .skills {
+           text-decoration:underline;
+          }
+    </style>
+    
+    <style>
+		.buttonSpaccing {
+		   margin-left: 5px;
+		   margin-right: 5px;
+		}
+		
+		.myBtn {
+            margin-left: 20px;
+        }
+    </style>
+    
+    <body>
+        <div
+            th:replace="fragments/header :: header">
+        </div>
+
+        <div class="container" id="layout">                                     
+            <div class="row">
+            
+                <div id='calendar'></div>       
+                
+            </div>
+        </div>
+        
+        
+        
+        <div th:fragment="calendarModals">
+         
+         
+            <!-- _________________________________________DECISION MODAL (STARTS)___________________________________________________________ -->
+         
+         
+		      <div class="modal fade" id="decision-modal" tabindex="-1" role="dialog"
+	            aria-labelledby="myModalLabel" data-mode="add">
+	            <div class="modal-dialog" role="document">
+	                <div class="modal-content panel panel-success" id="decision-pannel">
+			              <div class="panel-heading ">
+			                  <span class="glyphicon glyphicon-shopping-cart"></span> Order Details
+			              </div>
+				              <div class="panel-body">
+				                
+				                <div>
+				                    <button id="jump-to-orders-button" type="button" class="buttonSpacing btn btn-info"> <span class="glyphicon glyphicon-arrow-right"></span> Jump to Orders </button>
+				                </div>
+				                
+				               <div class="text-center">                        
+                                    <figure>     
+                                        <span class="fa fa-shopping-cart" style="font-size:75px; padding-top: 10px;"></span>                                 
+                                    </figure>
+                                </div>
+                                
+			                    <table class='table borderless table-hover' id="order-info">
+                                    <tr>
+                                       <th><font size="2">Order Id</font></th> <td id="displayOrderId"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Date of Delivery</font></th> <td id="displayDateOfDelivery"></td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <th><font size="2">Client Details</font></th> <td> <button id="client-details-by-clientId-btn" data-toggle="modal" data-target="#client-details-for-order-modal" style="background-color:#ECEDEE" type="button" class="btn-xs btn-default pull-left"> Details </button> </td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <th><font size="2">Product Details</font></th> <td> <button id="product-details-by-productId-btn" data-toggle="modal" data-target="#product-details-for-order-modal" style="background-color:#ECEDEE" type="button" class="btn-xs btn-default"> Details </button> </td> 
+                                    </tr>
+	                          </table>
+			                  <button type="button" class="buttonSpacing btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-arrow-left"></span> Back </button>
+			                  <button id="order-process-confirmation-button" type="button" class="buttonSpacing btn btn-success pull-right"> <span class="glyphicon glyphicon-ok"></span> Process Order </button>
+			                 <!-- data-toggle="modal" data-target="#order-process-modal" -->
+			              </div>
+	                </div>
+	            </div>
+            </div>
+		 
+             <!-- _________________________________________DECISION MODAL (ENDS)___________________________________________________________ -->
+             
+             
+             
+             
+             
+             
+             
+             
+             <!-- _________________________________________CLIENT DETAIL MODAL (STARTS)___________________________________________________________ -->
+         
+         
+              <div class="modal fade" id="client-details-modal" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" data-mode="add">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content panel panel-info" id="client-details-for-order-pannel">
+                       
+                          <div class="panel-heading">
+                              <i class="fa fa-user"> Client Details</i>
+                          </div>
+                              <div class="panel-body">
+                              
+                                <div>                        
+	                                <figure>
+	                                    <span class="fa fa-user pull-left" style="font-size:75px; padding-top: 10px;"></span>                                 
+	                                </figure>
+	                                
+	                                <figure>
+                                        <span class="fa fa-shopping-cart pull-right" style="font-size:75px; padding-top: 10px;"></span>                                 
+                                    </figure>
+	                            </div>
+                              
+                                <table class = "table borderless table-hover">
+                                   
+                                    <tr>
+                                        <th><font size="2">Name</font></th> <td id="displayClientName2"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Type</font></th> <td id="displayClientType2"></td>
+                                    </tr>
+                                    
+                                     <tr>
+                                        <th><font size="2">Transport </font></th> <td id="displayClientTransport2"></td>
+                                    </tr>
+                                    
+                                </table>
+                                
+                                <div class="text-center skills">
+	                                <strong> Contact</strong>
+	                            </div>
+                            
+                                
+                                <table class = "table borderless table-hover">
+                                    <tr>
+                                        <th><font size="2">Phone </font></th> <td id="displayClientPhone2"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Email </font></th> <td id="displayClientEmail2"></td>
+                                    </tr>
+                                    
+                                     <tr>
+                                        <th><font size="2">Address </font></th> <td id="displayClientAddress2"></td>
+                                    </tr>
+                              </table>
+                              <div class="row">
+                                 <div class="col-lg-4 col-md-4 col-sm-4 table-buttons">
+		                              <button type="button" class="buttonSpacing btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-arrow-left"></span> Back </button>
+		                         </div>
+		                         <div class="col-lg-4 col-md-4 col-sm-4 table-buttons">
+		                              <button id="mark-as-done-7" type="button" class="btn btn-info pull-right"> <i class="fa fa-check"> Mark as Done </i> </button>
+		                         </div>
+		                         <div class="col-lg-4 col-md-4 col-sm-4 table-buttons">
+		                              <button id="view-products-button3" type="button" class="btn btn-info pull-right"> <i class="fa fa-shopping-cart"> View Products </i> </button>
+		                         </div>
+		                      </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+         
+            <!-- _________________________________________CLIENT DETAILS MODAL (ENDS)___________________________________________________________ -->
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <!-- _________________________________________DISQ DETAIL MODAL (STARTS)___________________________________________________________ -->
+         
+         
+              <div class="modal fade" id="disq-details-modal" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" data-mode="add">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content panel panel-info" id="disq-details-for-order-pannel">
+                       
+                          <div class="panel-heading">
+                              <i class="fa fa-user"> Disqualified Client Details</i>
+                          </div>
+                              <div class="panel-body">
+                              
+                                <div>                        
+                                    <figure>
+                                        <span class="fa fa-user pull-left" style="font-size:75px; padding-top: 10px;"></span>                                 
+                                    </figure>
+                                    
+                                    <figure>
+                                        <span class="fa fa-shopping-cart pull-right" style="font-size:75px; padding-top: 10px;"></span>                                 
+                                    </figure>
+                                </div>
+                              
+                                <table class = "table borderless table-hover">
+                                   
+                                    <tr>
+                                        <th><font size="2">Name</font></th> <td id="displayClientName5"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Type</font></th> <td id="displayClientType5"></td>
+                                    </tr>
+                                    
+                                     <tr>
+                                        <th><font size="2">Transport </font></th> <td id="displayClientTransport5"></td>
+                                    </tr>
+                                    
+                                </table>
+                                
+                                <div class="text-center skills">
+                                    <strong> Contact</strong>
+                                </div>
+                            
+                                
+                                <table class = "table borderless table-hover">
+                                    <tr>
+                                        <th><font size="2">Phone </font></th> <td id="displayClientPhone5"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Email </font></th> <td id="displayClientEmail5"></td>
+                                    </tr>
+                                    
+                                     <tr>
+                                        <th><font size="2">Address </font></th> <td id="displayClientAddress5"></td>
+                                    </tr>
+                              </table>
+                              
+                              <button type="button" class="buttonSpacing btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-arrow-left"></span> Back </button>
+                              <button id="view-products-button5" type="button" class="btn btn-info pull-right"> <i class="fa fa-shopping-cart"> View Products </i> </button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+         
+            <!-- _________________________________________DISQ DETAILS MODAL (ENDS)___________________________________________________________ -->
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+            
+            
+             <!-- _________________________________________CLIENT DETAIL FOR ORDER MODAL (STARTS)___________________________________________________________ -->
+         
+         
+              <div class="modal fade" id="client-details-for-order-modal" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" data-mode="add">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content panel panel-info" id="client-details-for-order-pannel8">
+                       
+                          <div class="panel-heading">
+                              <i class="fa fa-user"> Client Details</i>
+                          </div>
+                              <div class="panel-body">
+                              
+                                <div class="text-center">                        
+                                    <figure>
+                                        <span class="fa fa-user pull-left" style="font-size:75px; padding-top: 10px;"></span>                                 
+                                    </figure>
+                                </div>
+                              
+                                <table class = "table borderless table-hover">
+                                   
+                                    <tr>
+                                        <th><font size="2">Name</font></th> <td id="displayClientName8"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Type</font></th> <td id="displayClientType8"></td>
+                                    </tr>
+                                    
+                                     <tr>
+                                        <th><font size="2">Transport </font></th> <td id="displayClientTransport8"></td>
+                                    </tr>
+                                    
+                                </table>
+                                
+                                <div class="text-center skills">
+                                    <strong> Contact</strong>
+                                </div>
+                            
+                                
+                                <table class = "table borderless table-hover">
+                                    <tr>
+                                        <th><font size="2">Phone </font></th> <td id="displayClientPhone8"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Email </font></th> <td id="displayClientEmail8"></td>
+                                    </tr>
+                                    
+                                     <tr>
+                                        <th><font size="2">Address </font></th> <td id="displayClientAddress8"></td>
+                                    </tr>
+                              </table>
+                              
+                              <button type="button" id="backFromClientDetailsForOrder-btn" class="buttonSpacing btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-arrow-left"></span> Back to Order</button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+         
+            <!-- _________________________________________CLIENT DETAILS FOR ORDER MODAL (ENDS)___________________________________________________________ -->
+         
+         
+         
+         
+         
+         
+         
+            <!-- _________________________________________PRODUCT DETAIL MODAL (STARTS)___________________________________________________________ -->
+         
+         
+              <div class="modal fade" id="product-details-for-order-modal" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" data-mode="add">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content panel panel-warning" id="product-details-for-order-pannel">
+                       
+                          <div class="panel-heading">
+                               <span class="glyphicon glyphicon-hdd"></span> Product Details
+                          </div>
+                              <div class="panel-body">
+                                
+                                <table class = "table borderless table-hover" id="product-info">
+                                    <tr>
+                                        <th><font size="2">Id</font></th> <td id="displayProductId2"></td> 
+                                    </tr>
+                                   
+                                    <tr>
+                                        <th><font size="2">Name</font></th> <td id="displayProductName2"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Price</font></th> <td id="displayProductPrice2"></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th><font size="2">Type</font></th> <td id="displayProductType2"></td>
+                                    </tr>
+                              </table>
+                              <button type="button" id="backFromProductDetailsForOrder-btn" class="buttonSpacing btn btn-danger" data-dismiss="modal"> <span class="glyphicon glyphicon-arrow-left"></span> Back to Order </button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+         
+            <!-- _________________________________________PRODUCT DETAILS MODAL (ENDS)___________________________________________________________ -->
+           
+          
+          
+         
+         
+         
+         
+         
+         
+         
+	        <!-- _________________________________________CREATE EVENT FOR THE DAY FORM (STARTS)___________________________________________________________ -->
+	        
+	        <div class="modal fade" id="createEventForTheDay-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-mode="add">
+		        <div class="modal-dialog" role="document">
+		            <div class="modal-content">
+		                
+		                <div class="modal-header">
+		                    <button type="button" class="close" data-dismiss="modal"
+		                        aria-label="Close">
+		                        <span aria-hidden="true">&times;</span>
+		                    </button>
+		                    <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-send"></span> Create Event! </h4>
+		                </div>
+		                
+		                <div class = "modal-body">
+		                    <form id = "createEventForTheDay-form">
+		                        
+		                             
+		                        <div class="form-group">
+	                                 <label for = "eventTitle"> Event For </label>
+	                                 <select id = "eventTitle" class = "form-control" name = "eventTitle">
+			                             <option value = "Lead Client">Lead Client</option>
+			                             <option value = "Active Client">Active Client</option>
+			                             <option value = "Active Client">Product Reminder</option>
+			                             <option value = "Active Client">Others</option>
+			                         </select>
+			                    </div>
+			                    
+			                    <div class="form-group">
+	                                <label for="productName">Client Name</label> <input name="productName"
+	                                    type="text" class="form-control" id="productName"
+	                                    placeholder="Name of the store"/>
+	                            </div>
+			                    
+			                   <div class="form-group">
+	                                <label for="eventDetails"> Event Details </label> <input name="eventDetails"
+	                                    type="text" class="form-control" id="eventDetails"
+	                                    placeholder="Event Details"/>
+	                            </div>
+			                    
+		                    </form>
+		                </div>
+		                
+		                <div class="modal-footer">
+		                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-remove-sign"></span> Cancel </button>
+		                    <button id="createEventForTheDay-confirm-button" type="button" class="btn btn-success"> <span class="glyphicon glyphicon-send"></span> Create Event </button>
+		                </div>
+		            </div>
+		        </div>
+	        </div>
+	        
+	        <!-- _________________________________________CREATE EVENT FOR THE DAY FORM (ENDS)___________________________________________________________ -->
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+	        <!-- _________________________________________PROCESS ORDER MODAL (STARTS)___________________________________________________________ -->
+	        
+	        
+		    <div class="modal fade" id="order-process-modal" tabindex="-1" role="dialog"
+		        aria-labelledby="myModalLabel" data-mode="add">
+		        <div class="modal-dialog" role="document">
+		            <div class="modal-content">
+		                
+		                <div class="modal-header">
+		                    <button type="button" class="close" data-dismiss="modal"
+		                        aria-label="Close">
+		                        <span aria-hidden="true">&times;</span>
+		                    </button>
+		                    <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-ok"></span> Process Order</h4>
+		                </div>
+		                
+		                <div class = "modal-body">
+		                    <form id = "order-process-form">
+		                    
+		                         <div class = "form-group">
+		                                 <label for = "OrderId"> Order Id </label> <input name = "orderId"
+		                                     type = "text" class = "form-control" id = "orderId"
+		                                     placeholder = "Order Id" />
+		                         </div>
+		                         
+		                         
+		                         <div class = "form-group">
+		                                 <label for = "clientName3"> Client Name </label> <input name = "clientName3"
+		                                     type = "text" class = "form-control" id = "clientName3"
+		                                     placeholder = "Client Name" />
+		                         </div>
+		                         
+		                         
+		                         <div class="form-group">
+		                                 <label for = "orderDate"> Date of delivery </label> <input name = "orderDate"
+		                                     type = "text" class = "form-control" id = "orderDate"/>
+		                         </div>
+		                         
+		                          <div class="form-group">
+	                                <label for="transport"> Transport </label>
+	                                <select id="trasport" class="form-control" name="transport">
+	                                    <option selected = "1" value = "Motorbike"> Motorbike </option>
+	                                    <option value = "Cab"> Cab </option>
+	                                    <option value="Bus"> Bus </option>
+	                                    <option value="Metro"> Metro </option>
+	                                    <option value="Ship"> Ship </option>
+	                                </select>
+	                             </div>
+	                             
+		                    </form>
+		                </div>
+		                
+		                <div class="modal-footer">
+		                    <button id = "dismiss-process-order-modal-btn" type="button" class="btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-remove-sign"></span> Later </button>
+		                    <button id="order-process-button" type="button" class="btn btn-success"> <span class="glyphicon glyphicon-floppy-disk"></span> Confirm </button>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		    
+		     <!-- _________________________________________LEAD PROFILE FOR CALENDAR (STARTS)___________________________________________________________ -->
+             
+         
+         
+              <div class="modal fade" id="lead-details-modal2" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel" data-mode="add">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content panel panel-info" id="lead-details-panel2">
+                       
+                          <div class="panel-heading">
+                              <i class="fa fa-user"> Lead Details</i>
+                          </div>
+                          <div class="panel-body">
+                          
+                            <div class="text-center">                        
+                                <figure>
+                                    <span class="fa fa-user" style="font-size:127px; padding-top: 10px;"></span>                                 
+                                </figure>
+                            </div>
+                            
+                            <table class = "table borderless table-hover">
+                               
+                                <tr>
+                                    <th><font size="2"> Lead Id </font></th> <td id="displayLeadId2"></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th><font size="2">Name </font></th> <td id="displayLeadName2"></td>
+                                </tr>
+                                
+                                 <tr>
+                                    <th><font size="2">Type </font></th> <td id="displayLeadType2"></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th><font size="2">Region </font></th> <td id="displayLeadRegion2"></td>
+                                </tr>
+                                
+                            </table>
+                                
+                            <div class="text-center skills">
+                                <strong> Contact</strong>
+                            </div>
+                            
+                            <table class = "table borderless table-hover">
+                                <tr>
+                                    <th><font size="2">Phone </font></th> <td id="displayLeadPhone2"></td> <td id="EmailButton"> <img src='resources/app/img/phone_button.png' style="width:20px;height:15px;"/> </td>
+                                </tr>
+                                
+                                 <tr>
+                                    <th><font size="2">Email </font></th> <td id="displayLeadEmail2"></td>  <td id="EmailButton"> <img src='resources/app/img/email_button.png' style="width:20px;height:15px;"/> </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th><font size="2">Address </font></th> <td id="displayLeadAddress2"></td>
+                                </tr>
+                            </table>
+                           
+                            <div class="row">
+                           
+	                            <div class="col-lg-3 col-md-3 col-sm-3 table-buttons">
+		                          <button id = "backFromLeadDetails2" type="button" class="btn btn-info" data-dismiss="modal"> <span class="glyphicon glyphicon-remove-sign"></span> Later </button>
+		                        </div> 
+		                          
+		                        <div class="col-lg-3 col-md-3 col-sm-3 table-buttons">
+		                          <button id="disqualify-lead-button2" type="button" class="btn btn-danger"> <i class="fa fa-thumbs-down"> Disqualify Lead </i> </button>
+		                        </div>  
+		                          
+		                         <div class="col-lg-3 col-md-3 col-sm-3 table-buttons">  
+		                          <button id="view-products-button2" type="button" class="btn btn-info"> <i class="fa fa-shopping-cart"> View Products </i> </button>
+		                         </div> 
+		                         
+		                         <div class="col-lg-3 col-md-3 col-sm-3 table-buttons">
+		                              <button id="mark-as-done2" type="button" class="btn btn-info"> <span class="glyphicon glyphicon-ok"></span> Mark as Done  </button>
+		                         </div>
+		                         
+	                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+         </div> <!-- Form Fragment Ends -->   
+         
+             
+             <!-- ___________________________________________________________________________________LEAD PROFILE FOR CALENDAR(ENDS)_______________________________________________________________________________________ -->
+		    
+		    
+		    
+		        
+		    <!-- ________________________________PROCESS ORDER MODAL (ENDS)_____________________________________________________ -->
+		    
+        
+        <div th:replace="fragments/footer :: footer"></div>
+        <script src="resources/app/js/calendar.js" type="text/javascript"> </script>
+        
+    </body>
+</html>
+

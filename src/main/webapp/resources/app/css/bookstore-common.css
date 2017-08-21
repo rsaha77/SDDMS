@@ -1,0 +1,80 @@
+
+/* Button Part => Buttons--Add, modify, delete  */
+/* Filter by Text only and not the tab */
+
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+.table-buttons {
+	margin-bottom: 10px;	
+}
+
+.table.table-striped>tbody>tr.selected>td, .table.table-striped>tbody>tr.selected>th {
+	background-color:#08C;
+	color: white;
+}
+        td.details-control {
+            background:  url('http://icons.iconarchive.com/icons/cheezen/web-2/128/plus-icon.png') no-repeat center center;
+            cursor: pointer;
+        }
+        tr.details td.details-control {
+            background:  url('http://icons.iconarchive.com/icons/cheezen/web-2/128/plus-icon.png') no-repeat center center;
+        }
+
+.select-wrapper {
+	display: table;
+}
+
+.input-group-addon.ok {
+	background-color: #4cae4c;
+	border-color: #4cae4c;
+	color: #ffffff;
+}
+
+.custom-new-input {
+	border-radius: 4px 0px 0px 4px !important;
+}
+
+.add-more-authors {
+	position: absolute;
+	right: 0;
+	float: right;
+	font-size: 10px;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.select-box-inline {
+	display: inline;
+	width: auto;
+	margin-bottom: 8px;
+}
+
+.author-div {
+	margin-bottom: 4px;
+}
+
+.select2-container {
+	width: 319px !important;
+}
+
+.add-new-anchor {
+	cursor: pointer;
+}
+
+.book-crousel-img {
+	margin-left: 40%;
+}
+
+.book-carousel{
+	margin: 0 22%;
+	background: lightgray;
+}
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+    height: 650px;
+    margin: auto;
+}

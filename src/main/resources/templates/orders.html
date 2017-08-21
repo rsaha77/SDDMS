@@ -1,0 +1,444 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	    <title> Order</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <ct th:replace="fragments/header :: commonhead"></ct>
+	    
+	    <style>
+	       /* .parent .popup {
+			  display: none;
+			}
+			
+			.parent:hover .popup {
+			  display: block;
+			} */
+			
+			/* .tiptext {
+			    background:#ccc;
+			    border: 1px #333 solid;
+			    padding:5px;
+			    width:50px;
+			}
+			.description {
+			    display:none;
+			    position:absolute;
+			    border:1px solid #000;
+			    width:100px;
+			    height:1000px;
+			} */
+			
+			#draggable { width: 150px; height: 150px; padding: 0.5em; }
+	    </style>      
+	</head>
+	
+	<body>
+	
+		<div
+			th:replace="fragments/header :: header">
+		</div>
+
+		<div class="container" id="layout">										
+			
+			<!-- ______________________________________Division for Buttons Starts___________________________________________________________________________________________________ -->
+				
+			<div class="row">
+				    
+				<div class="col-lg-12 col-sm-12 table-buttons"> 
+				    
+				    <!--___________________________________PROCESS ORDER______________________________________ -->
+				    
+				    <button id="order-process-modal-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#order-process-modal" disabled="disabled">
+                        <span class="glyphicon glyphicon-ok-circle"></span>
+                        <span>Process Order</span> 
+                    </button>
+                    
+                    <!--___________________________________PRODUCT OUT OF STOCK__________________________________ -->
+                     
+                    <button id="orderDetails-modal-btn" type="button" class="btn btn-info" data-toggle="modal" data-target="#orderDetails-modal" disabled="disabled">
+                        <span class="glyphicon glyphicon-send"></span>
+                        <span>Order Details</span>
+                    </button>
+				    
+				    <!--___________________________________MODIFY______________________________________ -->
+				    
+					<!-- <button id="order-modify-modal-btn" type="button" class="btn btn-warning" data-toggle="modal" data-target="#order-modify-modal" disabled="disabled">
+						<span class="glyphicon glyphicon-edit"></span>
+						<span>Modify Order Quantity</span> 
+					    <div id="popup" style="display: none"> _____CHECK_____ </div>
+					</button> -->
+					
+					<!-- <div class="tiptext">Text
+					   <div class="description"> Here is the big fat description box</div>
+					</div>-->
+					
+					
+					
+					<button id="order-delete-modal-btn" type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#order-delete-modal" disabled="disabled">
+						<span class="glyphicon glyphicon-trash pull-left" aria-hidden="true"></span>
+						<span>Cancel Order</span>  <!--___________________________________DELETE______________________________________ -->
+					</button>
+				</div>
+					
+            </div>
+				<!--  ______________________________________ Division for Buttons Ends _____________________________________________________ -->
+				
+				
+				
+				
+			<!-- _______________________________Filter Starts__________________________________________________  -->
+            
+            <!-- <div class = "row">    
+               <div class="col-lg-12 col-sm-12">
+                    <span
+                        th:text = "#{filter.by.transport}"> Filter by Region 
+                    </span> 
+                    
+                    <select id="client-transport-filter" class="form-control select-box-inline transport-selects">
+                        <option
+                            selected="selected" value="0" th:text="#{all}">All
+                        </option>
+                    </select>
+                </div>
+            </div>   -->
+            <!-- _______________________________Filter Ends__________________________________________________  -->
+                
+				
+			<br />
+			<br />
+				
+			<!-- _____________________________Display the attributes of the table____________________________________________________ -->
+                
+            <div class = "row"> 
+                <div class="col-lg-12 col-sm-12">
+                    <div class="modal-content panel panel-info" id="lead-from-manager-pannel">
+                    <div class="panel-heading">
+                         <i class="fa fa-shopping-cart"> Orders </i>
+                    </div>
+                    <div class="panel-body">
+                    <table id="order-table" class="table table-striped table-bordered table-hover"> <!-- _______Give the order table to JS for filling up the columns______________ -->
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Client Id</th>
+                                <th>Client Name</th>
+                                <th>Product Id</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Date of Delivery (Expected)</th>
+                                <th>Transport</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Client Id</th>
+                                <th>Client Name</th>
+                                <th>Product Id</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Date of Delivery (Expected)</th>
+                                <th>Transport</th>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                                
+                    </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!--  ________________________________________Table display Ends ________________________________________________________________________ -->
+		</div>
+		
+		
+		
+		
+	<!-- _________________________________________REPORT OUT OF STOCK FORM STARTS___________________________________________________________ -->
+        
+        
+    <div class="modal fade" id="reportOutOfStock-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" data-mode="add">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-send"></span> Report Out Of Stock </h4>
+                </div>
+                
+                <div class = "modal-body">
+                    <form id = "reportOutOfStock-form">
+                        
+                             
+                        <div class="form-group">
+                                 <label for = "proId"> Product Id </label> <input name = "proId"
+                                     type = "text" class = "form-control" id = "proId_2"/>
+                         </div>
+                         
+                          <div class="form-group">
+                                 <label for = "productName"> Product Name </label> <input name = "productName"
+                                     type = "text" class = "form-control" id = "productName_2"/>
+                         </div>
+                             
+                             
+                         <div class="form-group">
+                             <label for="dateOfDelivery"> Date of Delivery </label> <input name="dateOfDelivery"
+                                 type = "text" class = "form-control" id = "dateOfDelivery"/>
+                         </div>
+                         
+                         <div class="form-group">
+                             <label for="clientAffected"> Client Affetcted </label> <input name="clientAffected"
+                                 type = "text" class = "form-control" id = "clientAffected" />
+                         </div>
+                         
+                         <div class="form-group">
+                             <label for="noteToTheManager"> Note to the manager </label> <input name="noteToTheManager"
+                                 type = "text" class = "form-control" id = "noteToTheManager" />
+                         </div>
+                             
+                    </form>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-remove-sign"></span> Cancel </button>
+                        <button id="reportOutOfStock-confirm-button" type="button" class="btn btn-success"> <span class="glyphicon glyphicon-send"></span> Report </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        
+    <!-- ______________________________________________REPORT OUT OF STOCK FORM ENDS_______________________________________________________________ -->
+    
+		
+		
+		
+		            
+        <!-- _________________________________For the DELETE button_____________________________________________________ -->
+        
+        <div class="modal fade" id="order-delete-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" data-mode="add">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-trash"></span> Cancel Order </h4>
+                </div>
+                
+                <div class = "modal-body">
+                    <form id = "order-delete-form">
+                    
+                        <div class = "form-group">
+                            <label for = "OrderId_2"> Order Id </label> <input name = "orderId"
+                                type = "text" class = "form-control" id = "orderId_2"
+                                placeholder = "Order Id" />
+                        </div>
+                         
+                        <div class = "form-group">
+                            <label for = "reasonForCancellation">
+                                Please select a reason for cancellation
+                            </label>
+	                        <select id="reasonManual" class="form-control" name="reasonManual" onchange='CheckReasonForCancellation (this.value);'> 
+							    <option value = "Product Out of Stock permanently"> Product Out of Stock permanently </option>
+							    <option value = "Client cancelled the order"> Client cancelled the order </option>
+							    <option value = "Manager asked to cancel"> Manager asked to cancel </option>
+							    <option value = "others"> others </option>
+							</select>
+							<input type = "text" name = "reasonOther" id = "reason" style = 'display:none;'/>
+						</div>
+						
+						
+                    </form>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-arrow-left"></span>  Back </button>
+                    <button id="order-delete-button" type="button" class="btn btn-success"> <span class="glyphicon glyphicon-ok"></span> Confirm </button>
+                </div>
+             </div>
+            </div>
+         </div>
+        
+        <!-- _________________________________DELETE button ends_____________________________________________________ -->
+        
+        
+        
+    <!-- _________________________________________For the PROCESS ORDER button___________________________________________________________ -->
+        
+        
+    <div class="modal fade" id="order-process-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" data-mode="add">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-ok"></span> Process order</h4>
+                </div>
+                
+		        <div class = "modal-body">
+		            <form id = "order-process-form">
+		            
+		                 <div class = "form-group">
+		                         <label for = "OrderId"> Order Id </label> <input name = "orderId"
+		                             type = "text" class = "form-control" id = "orderId"
+		                             placeholder = "Order Id" />
+		                 </div>
+		                 
+		                 
+		                 <div class = "form-group">
+                                 <label for = "clientId"> Client Id </label> <input name = "clientId"
+                                     type = "text" class = "form-control" id = "clientId"
+                                     placeholder = "Client Id" />
+                         </div>
+                         
+                         
+                         <div class = "form-group">
+                                 <label for = "clientName"> Client Name </label> <input name = "clientName"
+                                     type = "text" class = "form-control" id = "clientName"
+                                     placeholder = "Client Name" />
+                         </div>
+                         
+		                     
+		                 <div class="form-group">
+		                         <label for = "proId"> Product Id </label> <input name = "proId"
+		                             type = "text" class = "form-control" id = "proId"
+		                             placeholder = "Product Id" />
+		                 </div>
+		                 
+		                 
+		                 <div class="form-group">
+		                         <label for = "productName"> Product Name </label> <input name = "productName"
+		                             type = "text" class = "form-control" id = "productName"
+		                             placeholder = "Product Name" />
+		                 </div>
+		                 
+		                 
+		                 <div class="form-group">
+		                         <label for = "orderQuantity"> Order Quantity </label> <input name = "orderQuantity"
+		                             type = "text" class = "form-control" id = "orderQuantity"
+		                             placeholder = "Number of cans" />
+		                 </div>
+		                 
+		                 
+		                 <div class="form-group">
+							<label for="transport"> Transport </label>
+							<select id="trasport" class="form-control" name="transport">
+								<option selected = "1" value = "Motorbike"> Motorbike </option>
+								<option value = "Cab"> Cab </option>
+								<option value="Bus"> Bus </option>
+								<option value="Metro"> Metro </option>
+								<option value="Ship"> Ship </option>
+							</select>
+						 </div>
+						 
+						 <div class="form-group">
+		                         <label for = "orderDate"> Date of delivery </label> <input name = "orderDate"
+		                             type = "text" class = "form-control" id = "orderDate"/>
+		                 </div>
+		                 
+		            </form>
+		        </div>
+		        
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-remove-sign"></span> Later </button>
+                        <button id="order-process-button" type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-floppy-disk"></span> Confirm </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        
+    <!-- _____________________________________________________________________________PROCESS ORDER button ends________________________________________________________________________________ -->
+    
+    
+    
+    
+    <!-- _____________________________________________________________________________Modify form starts_______________________________________________________________________________________________ -->
+        
+        
+    <div class="modal fade" id="order-modify-modal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" data-mode="add">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel"> <span class="glyphicon glyphicon-edit"></span> Modify Order Quantity </h4>
+                </div>
+                
+                <div class = "modal-body">
+                    <form id = "order-modify-form">
+                    
+                         <div class = "form-group">
+                                 <label for = "orderId_1"> Order Id </label> <input name = "orderId_1"
+                                     type = "text" class = "form-control" id = "orderId_1"
+                                     placeholder = "Order Id" />
+                         </div>
+                         
+                         <div class = "form-group">
+                                 <label for = "orderQCurrent"> Current Order Quantity </label> <input name = "orderQCurrent"
+                                     type = "text" class = "form-control" id = "orderQCurrent"/>
+                         </div>
+                         
+                         
+                         <div class="form-group">
+                                 <label for = "orderQuantity"> New Order Quantity </label> <input name = "orderQuantity"
+                                     type = "text" class = "form-control" id = "orderQuantity"
+                                     placeholder = "Enter the new order quantity !" />
+                         </div>
+                         
+                    </form>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"> <span class="glyphicon glyphicon-remove-sign"></span> Cancel </button>
+                        <button id="order-modify-button" type="button" class="btn btn-success"> <span class="glyphicon glyphicon-floppy-disk"></span> Confirm </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        
+    <!-- ____________________________________________________________________MODIFY form ends________________________________________________________________________________ -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+		
+		<!-- <script src="resources/lib/js/fnReloadAjax.js" type="text/javascript"></script> -->
+		
+		<!-- ____________________________________Common footer (JS libs)____________________________________________________________________ -->
+		
+		<div th:replace="fragments/footer :: footer"></div>
+		
+		
+		<!--  __________________________________Call to JS_________________________________________________________________________ -->
+		
+		<script src="resources/app/js/order.js" type="text/javascript"> </script>
+		
+	</body>
+</html>
+

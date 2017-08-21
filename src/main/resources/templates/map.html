@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title> Map </title>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <ct th:replace="fragments/header :: commonhead"></ct>        
+    
+        <script
+            src="http://maps.googleapis.com/maps/api/js">
+        </script>
+            
+            
+        <script>
+            function initialize() {
+              var mapProp = {
+                center:new google.maps.LatLng (51.508742,-0.120850),
+                zoom:2,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+              };
+              var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </head>
+
+    <body>
+       <div
+            th:replace="fragments/header :: header">
+       </div>
+       
+       <div class="container" id="layout">                                      
+            <div class="row">
+                <div
+                   id="googleMap" style="width:1300px;height:600px;">
+                </div>
+            </div>
+        </div>
+        
+        <div th:replace="fragments/footer :: footer"></div>
+        
+        <!--  __________________________________Call to JS_________________________________________________________________________ -->
+        
+        <script src="resources/app/js/map.js" type="text/javascript"> </script>
+    
+    </body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+	<head>
+	    <title> SDDMS login </title>               <!-- Title you see in browser head -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	    <ct th:replace="fragments/header :: commonhead"></ct>
+	    <link rel="stylesheet" href="resources/app/css/sddms-signin.css"/>            <!-- This is for styling the page like , color, size of the button, etc. To check out disable and enable this option -->
+	    
+	    <link rel="stylesheet" type="text/css" href="resources/lib/css/bootstrap.min.css" />
+	    <link rel="stylesheet" type="text/css" href="resources/lib/css/font-awesome.min.css" />
+	
+	    <script type="text/javascript" src="resources/lib/js/jquery-1.10.2.min.js"></script>
+	    <script type="text/javascript" src="resources/lib/js/bootstrap.min.js"></script>
+	    
+	    <style>
+	        .redborder {
+	            border: 2px solid #f96145;
+	            border-radius: 2px;
+	        }
+	    
+	        .hidden {
+	            display: none;
+	        }
+	    
+	        .visible {
+	            display: normal;
+	        }
+	    
+	        .colored {
+	            background-color: #F0EEEE;
+	        }
+	    
+	        .row {
+	            padding: 20px 0px;
+	        }
+	    
+	        .bigicon {
+	            font-size: 97px;
+	            color: #f96145;
+	        }
+	    
+	        .contcustom {
+	            text-align: center;
+	            width: 300px;
+	            border-radius: 0.5rem;
+	            top: 0;
+	            bottom: 0;
+	            left: 0;
+	            right: 0;
+	            margin: 10px auto;
+	            background-color: white;
+	            padding: 20px;
+	        }
+	    
+	        input {
+	            width: 100%;
+	            margin-bottom: 17px;
+	            padding: 15px;
+	            background-color: #ECF4F4;
+	            border-radius: 2px;
+	            border: none;
+	        }
+	    
+	        h2 {
+	            margin-bottom: 20px;
+	            font-weight: bold;
+	            color: #ABABAB;
+	        }
+	    
+	        .btn {
+	            border-radius: 2px;
+	            padding: 10px;
+	        }
+	    
+	        .med {
+	            font-size: 27px;
+	            color: white;
+	        }
+	    
+	        .medhidden {
+	            font-size: 27px;
+	            color: #f96145;
+	            padding: 10px;
+	            width: 100%;
+	        }
+	    
+	        .wide {
+	            background-color: #8EB7E4;
+	            width: 100%;
+	            -webkit-border-top-right-radius: 0;
+	            -webkit-border-bottom-right-radius: 0;
+	            -moz-border-radius-topright: 0;
+	            -moz-border-radius-bottomright: 0;
+	            border-top-right-radius: 0;
+	            border-bottom-right-radius: 0;
+	        }
+	        
+	        br {
+			   display: block;
+			   margin: 5px 0;
+			   line-height:22px;
+			}
+	    </style>
+	</head>
+	
+	
+	<body>
+		<div class="container">
+		  
+		    <div class="row">
+		        <div class="col-lg-4 col-sm-4">
+		        </div>
+		        <div class="contcustom" >
+		            <h2>Welcome to SDDMS</h2>
+		        </div>
+		        <div class="col-lg-4 col-sm-4">
+		        </div>
+		    </div>
+		  
+		   <div class="row colored">
+			  <div id="contentdiv" class="contcustom">
+			        <span
+			            class="fa fa-spinner bigicon">
+			        </span>
+			
+				    <form class="form-signin" method="post">
+				     	<h2 class="form-signin-heading">Login</h2>
+				     	<label for="inputUserId" class="sr-only" th:text="#{user.id}"></label>
+						<input type="text" id="inputUserId" name="userId" class="form-control" placeholder="username" required="required" autofocus="autofocus" />
+						<label for="inputPassword" class="sr-only">Password</label>
+						<br />
+						<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="required" />
+						<br />
+						<button id="button1" class="btn btn-default wide hidden"><span class="fa fa-check med"></span></button>
+						<button id = "lock1" class="fa fa-lock medhidden redborder" type="submit"></button>
+				    </form>
+				
+			   </div>
+			</div>
+		</div>
+		
+		<div
+		   th:replace="fragments/footer :: footer">
+		</div>
+		
+		<script src="resources/app/js/login.js" type="text/javascript"> </script>
+	</body>
+</html>

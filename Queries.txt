@@ -1,0 +1,4 @@
+REPLACE: UPDATE product SET potentialClient = replace (potentialClient, ", QQQQQ01", "") WHERE potentialClient like '%QQQQQ01%'
+
+
+CONCAT: UPDATE product SET potentialClient = concat (potentialClient, ", QQQQQ01") WHERE type like '%Fast Food Restaurant%'

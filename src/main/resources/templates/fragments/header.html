@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head th:remove="tag" th:fragment="commonhead">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="resources/lib/css/bootstrap.min.css"/>
+    
+    <link rel="stylesheet" href="resources/lib/css/datatables.min.css"/>
+    
+    <link rel="stylesheet" href="resources/app/css/bookstore-common.css"/>
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+    
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.css"/> -->
+    
+     <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="resources/lib/css/font-awesome.min.css" />
+    
+    <!-- Sweet Alert  -->
+    <link rel="stylesheet" type="text/css" href="resources/lib/css/sweetalert.css" />
+    
+    <link rel="stylesheet" type="text/css" href="resources/lib/css/all.min.css" />
+    
+    <link rel="stylesheet" type="text/css" href="resources/lib/css/shieldui-all.min.css" />
+    
+    <link rel="stylesheet" href="resources/lib/css/bootstrap-datetimepicker.min.css"/>
+    
+    <link rel="stylesheet" href="resources/lib/css/select2.css"/>
+    
+    <!-- Full Calendar  -->
+    <link rel='stylesheet' href='resources/lib/css/fullcalendar.css' />
+    
+    <style>
+    
+        .borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+            border: none;
+        }
+        
+	   	td.details-control {
+		    background:  url('resources/app/img/details_open.png') no-repeat center center;
+		    cursor: pointer;
+		}
+		tr.details td.details-control {
+		    background:  url('resources/app/img/details_close.png') no-repeat center center;
+		}
+		
+	</style>
+	
+	<style>
+	
+    	td.email-control {
+		    background:  url('resources/app/img/email_button.png') no-repeat center center;
+		    cursor: pointer;
+		}
+		tr.email td.email-control {
+            background:  url('resources/app/img/email_button.png') no-repeat center center;
+        }
+
+        tfoot input {
+            width: 100%;
+            padding: 3px;
+            box-sizing: border-box;
+        }
+
+        tfoot {
+            display: table-header-group;
+        }
+    </style>
+	
+  </head>
+  
+  <body>
+    <nav th:fragment="header" class="navbar navbar-inverse navbar-fixed-top">
+    
+	    <div class="container">
+	            
+	            
+	            <!-- <div class="col-lg-1 col-sm-1 table-buttons">
+                </div> -->
+                
+                
+               <!-- <div class="col-lg-8 col-sm-8 table-buttons"> -->
+                
+	        
+			        <div class="navbar-header">
+			         
+			          <!-- Salesperson Home -->
+			          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="navbar-collapse">
+			          </button>
+			          <a class="navbar-brand" href="./indexS" th:if="${session.roles.contains('SALESMAN')}"> <i class="fa fa-home"></i> Home</a>
+			        	
+			        	
+			          <!--  Manager Home -->
+			          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="navbar-collapse">
+			          </button>
+			          <a class="navbar-brand" href="./indexM" th:if="${session.roles.contains('MANAGER')}"> <i class="fa fa-home"></i> Home</a>
+			        
+			        </div>
+			        
+			        <nav class="navbar-collapse collapse">
+			          <ul id="book-store-navbar" class="nav navbar-nav">
+			            <li id="nav-client"><a href="./clientmanagement"><i class="fa fa-male"></i> Client</a></li>
+			            <li id="nav-product"><a href="./productmanagement"><i class="fa fa-suitcase"></i> Product</a></li>
+			            <li id="nav-calendar"><a href="./calendarManager" th:if="${session.roles.contains('MANAGER')}"> <i class="fa fa-calendar"></i>Calendar</a></li>
+			            <li id="nav-orders"><a href="./orders" th:if="${session.roles.contains('SALESMAN')}"> <i class="fa fa-th-large"></i> Orders</a></li>
+			            <li id="nav-orderHistory"><a href="./orderHistory"> <i class="fa fa-clock-o"></i> Order History</a></li>
+				        <li id="nav-logout"> <a href="./logout"><span class="pull-right"><i class="fa fa-sign-out"></i> Logout</span></a></li>
+			          </ul>
+			        </nav>
+	           
+	        </div>
+      
+    </nav>
+  </body>
+</html>
+
+
+
